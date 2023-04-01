@@ -16,7 +16,7 @@ with open("HackCopy.csv", 'r') as file:
         """
         Format of the dictionary:
         - Key = Course number (Ex: AEM120, CS272)
-        - Value = A set (to remove duplicate times) where:
+        - Value = A list where:
             + First index = Course title
             + After: A string that looks like "d, time", where d is the day of the week (M,T,W,R,F,S)
             and time is the time separated by a ',' so a split(',') function should work 
@@ -31,11 +31,14 @@ with open("HackCopy.csv", 'r') as file:
             if len(row[7]) > 4 or day not in "MTWRFS":
                 continue
             if cur_course_number not in course_dict:
-                course_dict[cur_course_number] = {row[6]}
-            course_dict[cur_course_number].add(day + ", " + row[8])
+                course_dict[cur_course_number] = [row[6]]
+            time = day + ", " + row[8]
+            # To remove duplicate times
+            if time not in course_dict[cur_course_number]:
+                course_dict[cur_course_number] += [time]
 
     # To get a specific course info, do:
-    # print(course_dict['course_number'])
+    print(course_dict['AEM120'][0])
     print(course_dict)  # Uncomment this to see how the dictionary looks.
 
 """
