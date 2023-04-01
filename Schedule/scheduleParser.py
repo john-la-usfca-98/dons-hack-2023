@@ -1,4 +1,6 @@
 import csv
+import requests
+from io import StringIO
 from itertools import combinations
 from datetime import datetime
 import itertools
@@ -13,32 +15,56 @@ def parse_time(t):
 
 
 course_dict = {}
-with open("HackCopy.csv", 'r') as file:
-    csvreader = csv.reader(file)
-    next(csvreader)
-    for row in csvreader:
-        valueList = []
 
+<<<<<<< HEAD
         cur_course_number = row[1] + row[2] + "-" + row[3]
+=======
+# Change this part of your code
+url = "https://drive.google.com/file/d/1VBgk_-EiNG3idVckxQpzzKedVYlqQGVH/view?usp=share_link"
+>>>>>>> 7e49f06 (uses online data base)
 
-        if cur_course_number == "":
-            cur_course_number = course_number
-        else:
-            course_number = cur_course_number
-        valueList.append("CRN: " + row[0])
-        valueList.append("Sec: " + row[3])
-        valueList.append(row[7])
-        if '-' in row[8]:
-            start_time, end_time = row[8].split('-')
-            valueList.append(start_time.strip())
-            valueList.append(end_time.strip())
-        else:
-            valueList.append(row[8].strip())
-            valueList.append('')  # Add an empty string for end_time if it's not available
+# Convert the Google Drive link to a direct download link
+file_id = url.split("/")[5]
+dwn_url = "https://drive.google.com/uc?id=" + file_id
 
+<<<<<<< HEAD
         valueList.append(row[18])
         # Instructor name^
         course_dict[cur_course_number] = valueList
+=======
+# Download the CSV file content
+response = requests.get(dwn_url)
+response.raise_for_status()
+
+# Read the CSV file content
+csv_data = StringIO(response.text)
+csvreader = csv.reader(csv_data)
+next(csvreader)
+
+for row in csvreader:
+    valueList = []
+
+    cur_course_number = row[1] + row[2] +  "-" + row[3]
+
+    if cur_course_number == "":
+        cur_course_number = course_number
+    else:
+        course_number = cur_course_number
+    valueList.append("CRN: " + row[0])
+    valueList.append("Sec: " + row[3])
+    valueList.append(row[7])
+    if '-' in row[8]:
+        start_time, end_time = row[8].split('-')
+        valueList.append(start_time.strip())
+        valueList.append(end_time.strip())
+    else:
+        valueList.append(row[8].strip())
+        valueList.append('')  # Add an empty string for end_time if it's not available
+
+    valueList.append(row[18])
+    #Instructor name^
+    course_dict[cur_course_number] = valueList
+>>>>>>> 7e49f06 (uses online data base)
 
 #argu = sys.argv[1]
 #classId = sys.argv[1]
