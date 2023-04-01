@@ -11,7 +11,7 @@ def parse_time(t):
         return datetime.strptime(t, '%I:%M%p').time()
 
 course_dict = {}
-with open("/Users/amin/dons-hack-2023/HackCopy.csv", 'r') as file:
+with open("HackCopy.csv", 'r') as file:
     csvreader = csv.reader(file)
     next(csvreader)
     for row in csvreader:

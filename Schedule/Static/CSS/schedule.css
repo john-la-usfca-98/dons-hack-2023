@@ -1,59 +1,116 @@
-.time {
-    width: 10%;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    box-sizing: border-box;
-    padding: 10px;
-    position: relative;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
-.days {
-    width: calc(100% / 5);
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    box-sizing: border-box;
-    padding: 10px;
-    position: relative;
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
 }
 
-.calendar-container {
-    width: 100%;
-    margin: 20px 0;
-    border: 1px solid #ddd;
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    overflow: hidden;
-  }
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.input-container {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+input[type=text] {
+    width: 100%;
+    border: none;
+    background-color: #F1F1F1;
+    height: 40px;
+    padding-left: 1.2em;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.calendar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+}
 
 .calendar-header {
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: #f2f2f2;
+    border-radius: 5px;
     padding: 10px;
+    margin-bottom: 15px;
 }
 
 .calendar-title {
     margin: 0;
     font-size: 18px;
+    font-weight: 700;
 }
 
-.outer {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+.calendar-container {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
 }
 
-label {
-    display: inline-block;
-    width: 70px;
-    margin-bottom: 5px;
-    text-align: right;
+.calendar-container td {
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid #ddd;
 }
 
-input[type=text] {
-    width: 30%;
-    border: none;
-    background-color: #F1F1F1;
-    height: 40px;
-    padding-left: 1.2em;
-    margin-top: 5px;
+.time, .days {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.content {
+    background-color: #ffffff;
 }
 
