@@ -1,3 +1,20 @@
 #tag {
     color: red;
 }
+
+.days {
+    width: calc(100% / 5);
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+}
+
+.calendar-container {
+    width: 100%;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+  }
