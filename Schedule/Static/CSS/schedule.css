@@ -2,6 +2,15 @@
     color: red;
 }
 
+.time {
+    width: 10%;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+}
+
 .days {
     width: calc(100% / 5);
     border-right: 1px solid #ddd;
@@ -18,3 +27,21 @@
     border-radius: 5px;
     overflow: hidden;
   }
+
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.calendar-title {
+    margin: 0;
+    font-size: 18px;
+}
+
+.outer {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
