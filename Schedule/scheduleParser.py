@@ -2,6 +2,7 @@ import csv
 from itertools import combinations
 from datetime import datetime
 import itertools
+import sys
 
 def parse_time(t):
     try:
@@ -34,12 +35,11 @@ with open("HackCopy.csv", 'r') as file:
             valueList.append('')  # Add an empty string for end_time if it's not available
 
         valueList.append(row[18])
-
+        #Instructor name^
         course_dict[cur_course_number] = valueList
 
-    sorted_course_dict = dict(sorted(course_dict.items()))
-
-classId = "AEM124,BUS100,CS245,cs111"
+argu = sys.argv[1]
+classId = sys.argv[1]
 
 def check_conflict(class1, class2):
     days1 = set(class1[1])
@@ -86,18 +86,72 @@ def get_schedule(classId):
 
     return possible_schedules
 
+# Add the following functions to compute the ranking score based on user preferences
+def compute_spread_score(schedule):
+    days = set()
+    for course in schedule:
+        days.update(set(course_dict[course][2]))
+    return len(days)
+
+def compute_time_preference_score(schedule, time_preference):
+    total_score = 0
+    for course in schedule:
+        if time_preference == "early":
+            total_score -= parse_time(course_dict[course][3]).hour
+        elif time_preference == "late":
+            total_score += parse_time(course_dict[course][3]).hour
+    return total_score
+
+def rank_schedules(schedules, spread_preference, time_preference):
+    ranked_schedules = sorted(
+        schedules,
+        key=lambda schedule: (
+            compute_spread_score(schedule) if spread_preference == "spread" else -compute_spread_score(schedule),
+            compute_time_preference_score(schedule, time_preference),
+        ),
+        reverse=True
+    )
+    return ranked_schedules
+
+# Get the schedules
 schedules = get_schedule(classId)
 
 if len(schedules) == 0:
     print("There are no possible schedules.")
-else:
-    schedule_num = 1
-    for schedule in schedules:
-        print(f"Schedule {schedule_num}:")
+    sys.exit()
+
+# After getting the schedules, ask for user preferences
+spread_preference = input("Do you want your courses spread out through the week or bunched up together? (spread/bunch): ").lower()
+while spread_preference not in ("spread", "bunch"):
+    spread_preference = input("Invalid input. Please enter 'spread' or 'bunch': ").lower()
+
+time_preference = input("Do you prefer classes earlier or later in the day? (early/late): ").lower()
+while time_preference not in ("early", "late"):
+    time_preference = input("Invalid input. Please enter 'early' or 'late': ").lower()
+
+# Rank the schedules based on user preferences
+ranked_schedules = rank_schedules(schedules, spread_preference, time_preference)
+
+# Display the top 5 ranked schedules
+print("\nTop 5 schedules based on your preferences:")
+for i, schedule in enumerate(ranked_schedules[:5]):
+    print(f"Rank {i+1}:")
+    for course in schedule:
+        course_info = course_dict[course]
+        print(f"{course_info[0]} {course}: {course_info[1]}, {course_info[2]}, {course_info[3]}-{course_info[4]} {course_info[5]}")
+    print("\n")
+
+# Give the user the choice to display all schedule combinations
+show_all = input("Do you want to see all the schedule combinations? (yes/no): ").lower()
+while show_all not in ("yes", "no"):
+    show_all = input("Invalid input. Please enter 'yes' or 'no': ").lower()
+
+if show_all == "yes":
+    print("\nAll schedule combinations:")
+    for i, schedule in enumerate(ranked_schedules):
+        print(f"Schedule {i+1}:")
         for course in schedule:
             course_info = course_dict[course]
             print(f"{course_info[0]} {course}: {course_info[1]}, {course_info[2]}, {course_info[3]}-{course_info[4]} {course_info[5]}")
         print("\n")
-        schedule_num += 1
-
 
