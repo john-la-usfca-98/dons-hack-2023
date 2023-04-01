@@ -14,6 +14,7 @@ def getDriver():
     driver.get("https://www.ratemyprofessors.com/search/teachers?query=*&sid=1600")
     return driver
 
-
 def getProf(pDriver):
-    rating = WebDriverWait()
+    rating = WebDriverWait(pDriver, 5).until(
+        EC.presence_of_element_located(By.XPATH, "")
+    )
