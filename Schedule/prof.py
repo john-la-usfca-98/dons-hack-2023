@@ -16,4 +16,4 @@ def getDriver():
 
 
 def getProf(pDriver):
-    rating = WebDriverW
+    rating = WebDriverWait()
