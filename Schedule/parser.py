@@ -40,7 +40,7 @@ with open("HackCopy.csv", 'r') as file:
 
     sorted_course_dict = dict(sorted(course_dict.items()))
 
-classId = "AEM124,BUS100,CS245,cs111"
+#classId = "AEM124,BUS100,CS245,cs111"
 
 def check_conflict(class1, class2):
     days1 = set(class1[1])
@@ -87,18 +87,19 @@ def get_schedule(classId):
 
     return possible_schedules
 
-schedules = get_schedule(classId)
+#schedules = get_schedule(classId)
 
-if len(schedules) == 0:
-    print("There are no possible schedules.")
-else:
-    schedule_num = 1
-    for schedule in schedules:
-        print(f"Schedule {schedule_num}:")
-        for course in schedule:
-            course_info = course_dict[course]
-            print(f"{course_info[0]} {course}: {course_info[1]}, {course_info[2]}, {course_info[3]}-{course_info[4]} {course_info[5]}")
-        print("\n")
-        schedule_num += 1
+def print_schedules(schedules):
+    if len(schedules) == 0:
+        print("There are no possible schedules.")
+    else:
+        schedule_num = 1
+        for schedule in schedules:
+            print(f"Schedule {schedule_num}:")
+            for course in schedule:
+                course_info = course_dict[course]
+                print(f"{course_info[0]} {course}: {course_info[1]}, {course_info[2]}, {course_info[3]}-{course_info[4]} {course_info[5]}")
+            print("\n")
+            schedule_num += 1
 
 
