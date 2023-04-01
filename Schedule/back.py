@@ -1,17 +1,12 @@
-import parser
-from flask import Flask, render_template, request, jsonify, redirect
+import scheduleParser
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
-@app.route("/", methods=('GET', 'POST'))
+@app.route("/")
+@app.route("/home")
+
 def fSchedule():
-    schedules = ""
-    if request.method == 'POST':
-        schedules = parser.get_schedule(request.form['classIds'])
-        #print(schedules)
-        parser.print_schedules(schedules)
-        schedules = request.form['classIds']
-        return render_template('schedule.html', schedules=schedules)
-    return render_template('schedule.html', schedules=schedules)
+    return render_template('schedule.html')
 
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = 5011, debug = True)
+    app.run(host = '0.0.0.0', port = 5000, debug = True)

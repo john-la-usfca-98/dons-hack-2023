@@ -1,0 +1,16 @@
+- HTML: user inputs comma separated string; clicks submit button
+
+- JS: on event of clicking submit button; get value of text input; send string value to parser.py
+
+- PY: set 'classID' as recipient of string value from JS file; executes program according to dynamic classID; 
+        sends lists of classes back to JS file (or writes it to a new text document)
+
+- JS: start with for loop; read the first list of classes and output data in a table
+
+- HTML: new button type 'submit' called 'New Schedule' resets the table
+
+- JS: on click of 'New Schedule', loop through the data and output the second list of data in a table
+
+- HTML: click 'New Schedule' again
+
+- JS: complete the next iteration of loop, change the data so it goes to the 3rd list of classes, and so on

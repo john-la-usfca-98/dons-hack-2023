@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function addClassToSchedule() {
     const classNum = document.getElementById('classNum').value;
-    const classTime = document.getElementById('classTime').value;
+    const classTime = document.getElementById('classTime').value; // POSSIBLY REMOVE CLASS TIME
 
     if (!classNum || !classTime) {
         alert('Please fill in both class number and time.');
