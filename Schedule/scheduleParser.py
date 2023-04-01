@@ -41,6 +41,7 @@ with open("HackCopy.csv", 'r') as file:
 argu = sys.argv[1]
 classId = sys.argv[1]
 
+
 def check_conflict(class1, class2):
     days1 = set(class1[1])
     days2 = set(class2[1])
@@ -85,6 +86,10 @@ def get_schedule(classId):
             possible_schedules.append(section_combinations)
 
     return possible_schedules
+
+#def profRating(schedule)
+ #   profName = schedule
+
 
 # Add the following functions to compute the ranking score based on user preferences
 def compute_spread_score(schedule):
@@ -146,6 +151,9 @@ show_all = input("Do you want to see all the schedule combinations? (yes/no): ")
 while show_all not in ("yes", "no"):
     show_all = input("Invalid input. Please enter 'yes' or 'no': ").lower()
 
+
+
+
 if show_all == "yes":
     print("\nAll schedule combinations:")
     for i, schedule in enumerate(ranked_schedules):
@@ -154,4 +162,8 @@ if show_all == "yes":
             course_info = course_dict[course]
             print(f"{course_info[0]} {course}: {course_info[1]}, {course_info[2]}, {course_info[3]}-{course_info[4]} {course_info[5]}")
         print("\n")
+
+
+
+
 
