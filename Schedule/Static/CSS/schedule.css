@@ -4,15 +4,31 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-image: url('https://events.usfca.edu/sites/default/files/styles/1920x1080/public/2022-07/st%20ignatius%20aerial.jpg?itok=epXaPXEq');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    backdrop-filter: blur(3px);
     color: #333;
 }
 
+/* Add the following CSS to create a semi-transparent background for the content */
+.content {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* The rest of your CSS code remains unchanged */
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 30px;
 }
+
+/* ... */
+
 
 h1 {
     margin-bottom: 20px;
@@ -113,4 +129,3 @@ label {
 .content {
     background-color: #ffffff;
 }
-
