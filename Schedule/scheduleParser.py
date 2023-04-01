@@ -40,8 +40,8 @@ with open("HackCopy.csv", 'r') as file:
         # Instructor name^
         course_dict[cur_course_number] = valueList
 
-argu = sys.argv[1]
-classId = sys.argv[1]
+#argu = sys.argv[1]
+#classId = sys.argv[1]
 
 
 def check_conflict(class1, class2):
