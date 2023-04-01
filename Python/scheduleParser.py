@@ -3,7 +3,6 @@ from itertools import combinations
 from datetime import datetime
 import itertools
 
-
 def parse_time(t):
     try:
         return datetime.strptime(t, '%I:%M %p').time()
