@@ -18,8 +18,9 @@ with open("HackCopy.csv", 'r') as file:
         - Key = Course number (Ex: AEM120, CS272)
         - Value = A list where:
             + First index = Course title
-            + After: A string that looks like "Day: d, Time: time", where d is the day of the week (M,T,W,R,F)
-            and time is the time 
+            + After: A string that looks like "d, time", where d is the day of the week (M,T,W,R,F)
+            and time is the time separated by a ',' so a split(',') function should work 
+            -> And the times have this format: from [am/pm]- to [am/pm] -> so another split('-') maybe?
         """
         for day in row[7]:
             """
@@ -32,6 +33,14 @@ with open("HackCopy.csv", 'r') as file:
 
             if cur_course_number not in course_dict:
                 course_dict[cur_course_number] = [row[6]]
-            course_dict[cur_course_number] += ["Day: " + day + ", Time: " + row[8]]
+            course_dict[cur_course_number] += [day + ", " + row[8]]
 
-print(course_dict) # Uncomment this to see how the dictionary looks. Ask me anything!!!
+    # To get a specific course info, do:
+    # print(course_dict['course_number'])
+    print(course_dict)  # Uncomment this to see how the dictionary looks.
+
+"""
+Feel free to ask me anything
+"""
+#def get_schedule(class_list): that returns a list of all possible schedules for a given list of class
+
