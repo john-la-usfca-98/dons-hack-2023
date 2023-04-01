@@ -13,7 +13,25 @@ with open("HackCopy.csv", 'r') as file:
         else:
             course_number = cur_course_number
 
-        #print("Days: " + row[7] + " Time: " + row[8])
+        """
+        Format of the dictionary:
+        - Key = Course number (Ex: AEM120, CS272)
+        - Value = A list where:
+            + First index = Course title
+            + After: A string that looks like "Day: d, Time: time", where d is the day of the week (M,T,W,R,F)
+            and time is the time 
+        """
+        for day in row[7]:
+            """
+            Some course titles have ',' in them so the parsing is kind of messed up. The next 2 lines of code
+            is to remove those course entirely from the dictionary. You can comment them out to see the problem.
+            The problematic course is UPA667
+            """
+            if day not in "MTWRF":
+                continue
 
-        course_dict[cur_course_number] = ["Days: " + row[7] + " Time: " + row[8]]
-print(course_dict)
+            if cur_course_number not in course_dict:
+                course_dict[cur_course_number] = [row[6]]
+            course_dict[cur_course_number] += ["Day: " + day + ", Time: " + row[8]]
+
+print(course_dict) # Uncomment this to see how the dictionary looks. Ask me anything!!!
