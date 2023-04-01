@@ -28,7 +28,7 @@ with open("HackCopy.csv", 'r') as file:
             is to remove those course entirely from the dictionary. You can comment them out to see the problem.
             The problematic course is UPA667
             """
-            if len(day) > 4 or day not in "MTWRFS":
+            if len(row[7]) > 4 or day not in "MTWRFS":
                 continue
             if cur_course_number not in course_dict:
                 course_dict[cur_course_number] = {row[6]}
