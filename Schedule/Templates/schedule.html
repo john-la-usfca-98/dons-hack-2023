@@ -45,6 +45,78 @@
                             <li>{{schedule}}</li>
                         {% endfor %}
                         <br>
+                        <table>
+                            <tr>
+                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Monday&nbsp;&nbsp;&nbsp;</th>
+                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Tuesday&nbsp;&nbsp;&nbsp;</th>
+                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Wednesday&nbsp;&nbsp;&nbsp;</th>
+                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Thursday&nbsp;&nbsp;&nbsp;</th>
+                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;</th>
+                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;</th>
+                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Sunday&nbsp;&nbsp;&nbsp;</th>
+                            </tr>
+                            <tr>
+                                <th>
+                                {% if 'M' in schedule_list[i] %}
+                                    {% for class in schedule_list[i]['M'] %}
+                                        {{class}}<br>
+                                    {% endfor %}
+                                {% else %}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {% endif %}
+                                </th>
+
+                                <th>
+                                {% if 'T' in schedule_list[i] %}
+                                    {% for class in schedule_list[i]['T'] %}
+                                        {{class}}<br>
+                                    {% endfor %}
+                                {% else %}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {% endif %}
+                                </th>
+
+                                <th>
+                                {% if 'W' in schedule_list[i] %}
+                                    {% for class in schedule_list[i]['W'] %}
+                                        {{class}}<br>
+                                    {% endfor %}
+                                {% else %}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {% endif %}
+                                </th>
+
+                                <th>
+                                {% if 'R' in schedule_list[i] %}
+                                    {% for class in schedule_list[i]['R'] %}
+                                        {{class}}<br>
+                                    {% endfor %}
+                                {% else %}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {% endif %}
+                                </th>
+
+                                <th>
+                                {% if 'F' in schedule_list[i] %}
+                                    {% for class in schedule_list[i]['F'] %}
+                                        {{class}}<br>
+                                    {% endfor %}
+                                {% else %}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {% endif %}
+                                </th>
+
+                                <th>
+                                {% if 'S' in schedule_list[i] %}
+                                    {% for class in schedule_list[i]['S'] %}
+                                        {{class}}<br>
+                                    {% endfor %}
+                                {% else %}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {% endif %}
+                                </th>
+                            </tr>
+                        </table><br>
                     {% endfor %}
                 </table>
             {% endif %}
