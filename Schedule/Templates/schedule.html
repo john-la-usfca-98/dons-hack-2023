@@ -32,23 +32,23 @@
             </form>
 
             {% if schedules != "" %}
-    <div class="calendar">
-        <div class="calendar-header">
-            <p class="calendar-title">Class Schedule</p>
-        </div>
-        <div class="calendar-container">
-            {% if not_class|length > 0 %}
-                <p>Invalid inputs: {{not_class}}</p>
-            {% endif %}
-            <p>Showing schedules for: {{is_class}}</p><br>
+        <div class="calendar">
+            <div class="calendar-header">
+                <p class="calendar-title">Class Schedule</p>
+            </div>
+            <div class="calendar-container">
+                {% if not_class|length > 0 %}
+                    <p>Invalid inputs: {{not_class}}</p>
+                {% endif %}
+                <p>Showing schedules for: {{is_class}}</p><br>
 
-            {% for i in range(len_schedules) %}
-                <label>Rank: {{i+1}}</label>
-                {% for schedule in schedules[i] %}
-                    <li>{{schedule}}</li>
-                {% endfor %}
-                <br>
-                <table class="schedule-table">
+                {% for i in range(len_schedules) %}
+                    <label>Rank: {{i+1}}</label>
+                    {% for schedule in schedules[i] %}
+                        <li>{{schedule}}</li>
+                    {% endfor %}
+                    <br>
+                    <table class="schedule-table">
                     <thead>
                         <tr>
                             <th>Monday</th>
@@ -74,10 +74,15 @@
                         </tr>
                     </tbody>
                 </table><br>
-            {% endfor %}
+
+                    {% if not i + 1 == len_schedules %}
+                        <hr class="schedule-divider">
+                    {% endif %}
+
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    {% endif %}
+        {% endif %}
         </div>
     </body>
 </html>
