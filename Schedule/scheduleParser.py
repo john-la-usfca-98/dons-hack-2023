@@ -6,13 +6,32 @@ from datetime import datetime
 import itertools
 import sys
 
-
 def parse_time(t):
     try:
         return datetime.strptime(t, '%I:%M %p').time()
     except ValueError:
         return datetime.strptime(t, '%I:%M%p').time()
 
+course_dict = {}
+profRating = {}
+
+file_path = 'rateProf.csv'
+
+with open(file_path, mode='r', newline='') as csvfile:
+    csvreader = csv.reader(csvfile)
+    
+    # Reading the rows (data)
+    for row in csvreader:
+        temp = []
+        temp = row[0].split(';')
+        name_parts = temp[1].split()
+        first_name = name_parts[0]
+        last_name = name_parts[-1]
+        key = (first_name[:2] + last_name).lower()
+        profRating[key] = temp[0]
+    #print(profRating)
+
+    #print(profRating)
 
 # Change this part of your code
 url = "https://drive.google.com/file/d/1VBgk_-EiNG3idVckxQpzzKedVYlqQGVH/view?usp=share_link"
@@ -30,36 +49,32 @@ csv_data = StringIO(response.text)
 csvreader = csv.reader(csv_data)
 next(csvreader)
 
-course_dict = {}
-with open("HackCopy.csv", 'r') as file:
-    csvreader = csv.reader(file)
-    next(csvreader)
-    for row in csvreader:
-        valueList = []
+for row in csvreader:
+    valueList = []
 
-        cur_course_number = row[1] + row[2] + "-" + row[3]
+    cur_course_number = row[1] + row[2] +  "-" + row[3]
 
-        if cur_course_number == "":
-            cur_course_number = course_number
-        else:
-            course_number = cur_course_number
-        valueList.append("CRN: " + row[0])
-        valueList.append("Sec: " + row[3])
-        valueList.append(row[7])
-        if '-' in row[8]:
-            start_time, end_time = row[8].split('-')
-            valueList.append(start_time.strip())
-            valueList.append(end_time.strip())
-        else:
-            valueList.append(row[8].strip())
-            valueList.append('')  # Add an empty string for end_time if it's not available
+    if cur_course_number == "":
+        cur_course_number = course_number
+    else:
+        course_number = cur_course_number
+    valueList.append("CRN: " + row[0])
+    valueList.append("Sec: " + row[3])
+    valueList.append(row[7])
+    if '-' in row[8]:
+        start_time, end_time = row[8].split('-')
+        valueList.append(start_time.strip())
+        valueList.append(end_time.strip())
+    else:
+        valueList.append(row[8].strip())
+        valueList.append('')  # Add an empty string for end_time if it's not available
 
-        valueList.append(row[18])
-        # Instructor name^
-        course_dict[cur_course_number] = valueList
+    valueList.append(row[18])
+    #Instructor name^
+    course_dict[cur_course_number] = valueList
 
-#argu = sys.argv[1]
-#classId = sys.argv[1]
+argu = sys.argv[1]
+classId = sys.argv[1]
 
 
 def check_conflict(class1, class2):
@@ -75,22 +90,15 @@ def check_conflict(class1, class2):
         return True
     return False
 
-
-def get_schedule(classId):
-    classId = classId.replace(" ", "")
+def get_schedule(classId): 
     class_sections = {}
     classIdList = classId.split(',')
-    res = []
-    not_class = []
-    is_class = []
-
+    
     for course in classIdList:
         prefix = course.split('-')[0].lower()
         if prefix not in [key.split('-')[0].lower() for key in course_dict.keys()]:
             print("No courses found for prefix:", prefix)
-            not_class += [prefix]
         else:
-            is_class += [prefix.upper()]
             class_sections[prefix] = []
             for key in course_dict.keys():
                 if key.lower().startswith(prefix):
@@ -111,10 +119,11 @@ def get_schedule(classId):
 
         if not conflict:
             possible_schedules.append(section_combinations)
-    res.append(possible_schedules)
-    res.append(not_class)
-    res.append(is_class)
-    return res
+
+    return possible_schedules
+
+#def profRating(schedule)
+ #   profName = schedule
 
 
 # Add the following functions to compute the ranking score based on user preferences
@@ -124,7 +133,6 @@ def compute_spread_score(schedule):
         days.update(set(course_dict[course][2]))
     return len(days)
 
-
 def compute_time_preference_score(schedule, time_preference):
     total_score = 0
     for course in schedule:
@@ -133,7 +141,6 @@ def compute_time_preference_score(schedule, time_preference):
         elif time_preference == "late":
             total_score += parse_time(course_dict[course][3]).hour
     return total_score
-
 
 def rank_schedules(schedules, spread_preference, time_preference):
     ranked_schedules = sorted(
@@ -146,16 +153,14 @@ def rank_schedules(schedules, spread_preference, time_preference):
     )
     return ranked_schedules
 
-
 # Get the schedules
-# schedules = get_schedule(classId)
-"""
+schedules = get_schedule(classId)
+
 if len(schedules) == 0:
     print("There are no possible schedules.")
     sys.exit()
-"""
+
 # After getting the schedules, ask for user preferences
-"""
 spread_preference = input("Do you want your courses spread out through the week or bunched up together? (spread/bunch): ").lower()
 while spread_preference not in ("spread", "bunch"):
     spread_preference = input("Invalid input. Please enter 'spread' or 'bunch': ").lower()
@@ -166,27 +171,48 @@ while time_preference not in ("early", "late"):
 
 # Rank the schedules based on user preferences
 ranked_schedules = rank_schedules(schedules, spread_preference, time_preference)
-"""
+
+def get_professor_rating(professor_name):
+    name_parts = professor_name.split()
+    first_name = name_parts[0]
+    last_name = None
+
+    for part in reversed(name_parts):
+        if part.startswith("("):
+            continue
+        else:
+            last_name = part
+            break
+
+    key = (first_name[:2] + last_name).lower()
+
+    for prof_key, rating in profRating.items():
+        if prof_key.lower() == key:
+            return rating
+
+    return "NR"
+
+
+
+
 
 
 # Display the top 5 ranked schedules
-def print_rank_schedules(ranked_schedules):
-    res = []
-    for i, schedule in enumerate(ranked_schedules):
-        temp = []
-        for course in schedule:
-            course_info = course_dict[course]
-            temp += [course_info[0] + " " + course + ": " + course_info[1] + ", " + course_info[2] + ", " + course_info[
-                3] + "-" + course_info[4] + " " + course_info[5]]
-        res.append(temp)
-    return res
-
-
-"""
+print("\nTop 5 schedules based on your preferences:")
+for i, schedule in enumerate(ranked_schedules[:5]):
+    print(f"Rank {i+1}:")
+    for course in schedule:
+        course_info = course_dict[course]
+        prof_rating = get_professor_rating(course_info[5])
+        print(f"{course_info[0]} {course}: {course_info[1]}, {course_info[2]}, {course_info[3]}-{course_info[4]} {course_info[5]}, Rating: {prof_rating}")
+    print("\n")
 # Give the user the choice to display all schedule combinations
 show_all = input("Do you want to see all the schedule combinations? (yes/no): ").lower()
 while show_all not in ("yes", "no"):
     show_all = input("Invalid input. Please enter 'yes' or 'no': ").lower()
+
+
+
 
 if show_all == "yes":
     print("\nAll schedule combinations:")
@@ -194,6 +220,11 @@ if show_all == "yes":
         print(f"Schedule {i+1}:")
         for course in schedule:
             course_info = course_dict[course]
-            print(f"{course_info[0]} {course}: {course_info[1]}, {course_info[2]}, {course_info[3]}-{course_info[4]} {course_info[5]}")
+            prof_rating = get_professor_rating(course_info[5])
+            print(f"{course_info[0]} {course}: {course_info[1]}, {course_info[2]}, {course_info[3]}-{course_info[4]} {course_info[5]}, Rating: {prof_rating}")
         print("\n")
-"""
+
+
+
+
+
