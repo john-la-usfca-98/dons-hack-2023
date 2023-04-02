@@ -14,25 +14,6 @@ def parse_time(t):
 
 course_dict = {}
 
-
-#rate my professor rating with updated data
-file_path = 'rateProf.csv'
-profRatings = {}
-temp = []
-
-with open(file_path, mode='r', newline='') as csvfile:
-    csvreader = csv.reader(csvfile)
-    
-    # Reading the header (column names)
-
-    
-    # Reading the rows (data)
-    for row in csvreader:
-        temp = row[0].split(';')
-        profRatings[temp[1]] = temp[0]
-
-#    print(profRatings)
-
 # Change this part of your code
 url = "https://drive.google.com/file/d/1VBgk_-EiNG3idVckxQpzzKedVYlqQGVH/view?usp=share_link"
 
@@ -90,29 +71,15 @@ def check_conflict(class1, class2):
         return True
     return False
 
-<<<<<<< HEAD
-
-def get_schedule(classId):
-    classId = classId.replace(" ", "")
-    class_sections = {}
-    classIdList = classId.split(',')
-    res = []
-    not_class = []
-    is_class = []
-
-=======
 def get_schedule(classId): 
     class_sections = {}
     classIdList = classId.split(',')
     
->>>>>>> 687a3af (made changes)
     for course in classIdList:
         prefix = course.split('-')[0].lower()
         if prefix not in [key.split('-')[0].lower() for key in course_dict.keys()]:
             print("No courses found for prefix:", prefix)
-            not_class += [prefix]
         else:
-            is_class += [prefix.upper()]
             class_sections[prefix] = []
             for key in course_dict.keys():
                 if key.lower().startswith(prefix):
@@ -133,10 +100,8 @@ def get_schedule(classId):
 
         if not conflict:
             possible_schedules.append(section_combinations)
-    res.append(possible_schedules)
-    res.append(not_class)
-    res.append(is_class)
-    return res
+
+    return possible_schedules
 
 #def profRating(schedule)
  #   profName = schedule
@@ -189,31 +154,11 @@ while time_preference not in ("early", "late"):
 ranked_schedules = rank_schedules(schedules, spread_preference, time_preference)
 
 # Display the top 5 ranked schedules
-<<<<<<< HEAD
-def print_rank_schedules(ranked_schedules):
-    res = []
-    for i, schedule in enumerate(ranked_schedules):
-        temp = []
-        for course in schedule:
-            course_info = course_dict[course]
-            temp += [course_info[0] + " " + course + ": " + course_info[1] + ", " + course_info[2] + ", " + course_info[
-                3] + "-" + course_info[4] + " " + course_info[5]]
-        res.append(temp)
-    return res
-=======
 print("\nTop 5 schedules based on your preferences:")
 for i, schedule in enumerate(ranked_schedules[:5]):
     print(f"Rank {i+1}:")
     for course in schedule:
         course_info = course_dict[course]
->>>>>>> 687a3af (made changes)
-
-
-        if course_info[5] in profRatings:
-            print("succeess")
-
-
-
         print(f"{course_info[0]} {course}: {course_info[1]}, {course_info[2]}, {course_info[3]}-{course_info[4]} {course_info[5]}")
     print("\n")
 
@@ -233,6 +178,7 @@ if show_all == "yes":
             course_info = course_dict[course]
             print(f"{course_info[0]} {course}: {course_info[1]}, {course_info[2]}, {course_info[3]}-{course_info[4]} {course_info[5]}")
         print("\n")
+
 
 
 
