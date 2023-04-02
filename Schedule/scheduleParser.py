@@ -77,14 +77,20 @@ def check_conflict(class1, class2):
 
 
 def get_schedule(classId):
+    classId = classId.replace(" ", "")
     class_sections = {}
     classIdList = classId.split(',')
+    res = []
+    not_class = []
+    is_class = []
 
     for course in classIdList:
         prefix = course.split('-')[0].lower()
         if prefix not in [key.split('-')[0].lower() for key in course_dict.keys()]:
             print("No courses found for prefix:", prefix)
+            not_class += [prefix]
         else:
+            is_class += [prefix.upper()]
             class_sections[prefix] = []
             for key in course_dict.keys():
                 if key.lower().startswith(prefix):
@@ -105,8 +111,10 @@ def get_schedule(classId):
 
         if not conflict:
             possible_schedules.append(section_combinations)
-
-    return possible_schedules
+    res.append(possible_schedules)
+    res.append(not_class)
+    res.append(is_class)
+    return res
 
 
 # Add the following functions to compute the ranking score based on user preferences
@@ -163,9 +171,8 @@ ranked_schedules = rank_schedules(schedules, spread_preference, time_preference)
 
 # Display the top 5 ranked schedules
 def print_rank_schedules(ranked_schedules):
-    print("\nTop 5 schedules based on your preferences:")
     res = []
-    for i, schedule in enumerate(ranked_schedules[:5]):
+    for i, schedule in enumerate(ranked_schedules):
         temp = []
         for course in schedule:
             course_info = course_dict[course]
