@@ -33,7 +33,7 @@ def fSchedule():
                         possible_schedule_dict[day] = []
                     possible_schedule_dict[day].append(course_num)
             schedule_list.append(possible_schedule_dict)
-        print(schedule_list)
+        #print(schedule_list)
 
         options = "Courses: " + request.form['classIds'] + ", Spread: " + request.form['range'] + ", Time: " + \
                   request.form['time']
