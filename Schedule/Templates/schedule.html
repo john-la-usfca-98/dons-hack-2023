@@ -32,96 +32,52 @@
             </form>
 
             {% if schedules != "" %}
-            <div class="calendar">
-                <div class="calendar-header">
-                    <p class="calendar-title">Class Schedule</p>
-                </div>
-                <table class="calendar-container">
-                    <p>Invalid inputs: {{not_class}}</p>
-                    <p>Showing schedules for: {{is_class}}</p><br>
-
-                    {% for i in range(len_schedules) %}
-                        <label>Rank: {{i+1}}</label>
-                        {% for schedule in schedules[i] %}
-                            <li>{{schedule}}</li>
-                        {% endfor %}
-                        <br>
-                        <table>
-                            <tr>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Monday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Tuesday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Wednesday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Thursday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Sunday&nbsp;&nbsp;&nbsp;</th>
-                            </tr>
-                            <tr>
-                                <th>
-                                {% if 'M' in schedule_list[i] %}
-                                    {% for class in schedule_list[i]['M'] %}
-                                        {{class}}<br>
-                                    {% endfor %}
-                                {% else %}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                {% endif %}
-                                </th>
-
-                                <th>
-                                {% if 'T' in schedule_list[i] %}
-                                    {% for class in schedule_list[i]['T'] %}
-                                        {{class}}<br>
-                                    {% endfor %}
-                                {% else %}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                {% endif %}
-                                </th>
-
-                                <th>
-                                {% if 'W' in schedule_list[i] %}
-                                    {% for class in schedule_list[i]['W'] %}
-                                        {{class}}<br>
-                                    {% endfor %}
-                                {% else %}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                {% endif %}
-                                </th>
-
-                                <th>
-                                {% if 'R' in schedule_list[i] %}
-                                    {% for class in schedule_list[i]['R'] %}
-                                        {{class}}<br>
-                                    {% endfor %}
-                                {% else %}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                {% endif %}
-                                </th>
-
-                                <th>
-                                {% if 'F' in schedule_list[i] %}
-                                    {% for class in schedule_list[i]['F'] %}
-                                        {{class}}<br>
-                                    {% endfor %}
-                                {% else %}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                {% endif %}
-                                </th>
-
-                                <th>
-                                {% if 'S' in schedule_list[i] %}
-                                    {% for class in schedule_list[i]['S'] %}
-                                        {{class}}<br>
-                                    {% endfor %}
-                                {% else %}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                {% endif %}
-                                </th>
-                            </tr>
-                        </table><br>
-                    {% endfor %}
-                </table>
+    <div class="calendar">
+        <div class="calendar-header">
+            <p class="calendar-title">Class Schedule</p>
+        </div>
+        <div class="calendar-container">
+            {% if not_class|length > 0 %}
+                <p>Invalid inputs: {{not_class}}</p>
             {% endif %}
-            </div>
+            <p>Showing schedules for: {{is_class}}</p><br>
+
+            {% for i in range(len_schedules) %}
+                <label>Rank: {{i+1}}</label>
+                {% for schedule in schedules[i] %}
+                    <li>{{schedule}}</li>
+                {% endfor %}
+                <br>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for day in ['M', 'T', 'W', 'R', 'F', 'S'] %}
+                                <td>
+                                    {% if day in schedule_list[i] %}
+                                        {% for class in schedule_list[i][day] %}
+                                            <div class="class-entry">{{class}}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                </table><br>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
         </div>
     </body>
 </html>

@@ -18,7 +18,6 @@ h1 {
     text-align: center;
     font-weight: 700;
     font-size: 2rem;
-    color: #ffffff;
 }
 
 form {
@@ -119,6 +118,12 @@ label {
    
 }
 
+.time, .days {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
 .button-container {
     display: flex;
     justify-content: space-between;
@@ -144,4 +149,46 @@ label {
     border-top: 2px solid #ddd;
 }
 
+.content {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 5px;
+}
 
+.fcc-btn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.schedule-table th {
+    background-color: #4CAF50;
+    color: #ffffff;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #d3d3d3;
+}
+
+.schedule-table td {
+    border: 1px solid #d3d3d3;
+    padding: 8px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.class-entry {
+    margin-bottom: 4px;
+}
