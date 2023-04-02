@@ -26,4 +26,4 @@ def fSchedule():
     return render_template('schedule.html', schedules=schedules)
 
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = 5011, debug = True)
+    app.run(host = '0.0.0.0', port = 5012, debug = True)
