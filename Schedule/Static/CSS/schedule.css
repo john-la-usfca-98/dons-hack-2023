@@ -13,23 +13,6 @@ body {
     color: #333;
 }
 
-/* Add the following CSS to create a semi-transparent background for the content */
-.content {
-    background-color: rgba(255, 255, 255, 0.85);
-    padding: 20px;
-    border-radius: 5px;
-}
-
-/* The rest of your CSS code remains unchanged */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px;
-}
-
-/* ... */
-
-
 h1 {
     margin-bottom: 20px;
     text-align: center;
@@ -47,6 +30,12 @@ form {
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 30px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
 }
 
 .input-container {
@@ -127,5 +116,7 @@ label {
 }
 
 .content {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 5px;
 }

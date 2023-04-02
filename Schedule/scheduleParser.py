@@ -1,4 +1,6 @@
 import csv
+import requests
+from io import StringIO
 from itertools import combinations
 from datetime import datetime
 import itertools
@@ -11,6 +13,22 @@ def parse_time(t):
     except ValueError:
         return datetime.strptime(t, '%I:%M%p').time()
 
+
+# Change this part of your code
+url = "https://drive.google.com/file/d/1VBgk_-EiNG3idVckxQpzzKedVYlqQGVH/view?usp=share_link"
+
+# Convert the Google Drive link to a direct download link
+file_id = url.split("/")[5]
+dwn_url = "https://drive.google.com/uc?id=" + file_id
+
+# Download the CSV file content
+response = requests.get(dwn_url)
+response.raise_for_status()
+
+# Read the CSV file content
+csv_data = StringIO(response.text)
+csvreader = csv.reader(csv_data)
+next(csvreader)
 
 course_dict = {}
 with open("HackCopy.csv", 'r') as file:
