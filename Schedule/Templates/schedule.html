@@ -10,7 +10,6 @@
 
             <form method="post">
                 <div class="input-container">
-                    <a class="fcc-btn" href="/">REFRESH</a><br>
                     <label>Course Numbers:</label>
                     <input type="text" name="classIds" placeholder="Enter classes separated by commas (ex: AEM124,BUS100,CS245,cs111)">
 
@@ -26,7 +25,10 @@
                     <input type="radio" id="show_all" name="show_list" value="show_all" required> Show All
                     <input type="radio" id="show_5" name="show_list" value="show_5"> Show Top 5
                 </div>
-                <button type="submit" class="submit-btn">Generate schedule</button>
+                <div class="button-container">
+                    <a class="fcc-btn refresh-btn" href="/">REFRESH</a>
+                    <button type="submit" class="submit-btn">Generate schedule</button>
+                </div>
             </form>
 
             {% if schedules != "" %}
@@ -35,7 +37,6 @@
                     <p class="calendar-title">Class Schedule</p>
                 </div>
                 <table class="calendar-container">
-                    <p>{{options}}</p>
                     <p>Invalid inputs: {{not_class}}</p>
                     <p>Showing schedules for: {{is_class}}</p><br>
 
