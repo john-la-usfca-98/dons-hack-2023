@@ -25,7 +25,7 @@ def fSchedule():
             possible_schedule_dict = {}
             for schedule in ranked[i]:
                 info = schedule.split(',')
-                course_num = info[0].split(" ")[2][:-1]
+                course_num = info[0].split(" ")[2]
                 days = info[1].replace(" ", "")
                 time = info[2][:18]
                 for day in days:
