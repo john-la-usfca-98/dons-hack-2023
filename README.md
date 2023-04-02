@@ -1,3 +1,2 @@
-# dons-hack-2023
-Dons Hackathon Spring 2023
-hi 
+# ClassMate - Dons Hack 2023
+A course scheduler
