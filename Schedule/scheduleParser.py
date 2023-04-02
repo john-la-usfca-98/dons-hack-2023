@@ -214,7 +214,7 @@ def print_rank_schedules(ranked_schedules):
         for course in schedule:
             course_info = course_dict[course]
             prof_rating = get_professor_rating(course_info[5])
-            temp += [course_info[0] + " " + course + ": " + course_info[1] + ", " + course_info[2] + ", " + course_info[
+            temp += [course_info[0] + " " + course + ", " + course_info[2] + ", " + course_info[
                 3] + "-" + course_info[4] + " " + course_info[5] + ", RMP Rating: " + prof_rating]
         res.append(temp)
     return res

@@ -40,23 +40,23 @@
                     <p>Showing schedules for: {{is_class}}</p><br>
 
                     {% for i in range(len_schedules) %}
-                        <label>Rank: {{i+1}}</label>
+                        <label>Rank {{i+1}}:</label>
                         {% for schedule in schedules[i] %}
                             <li>{{schedule}}</li>
                         {% endfor %}
                         <br>
                         <table>
                             <tr>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Monday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Tuesday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Wednesday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Thursday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;</th>
-                                <th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Sunday&nbsp;&nbsp;&nbsp;</th>
+                                <th style="background-color:khaki" scope="col">&nbsp;&nbsp;&nbsp;Monday&nbsp;&nbsp;&nbsp;</th>
+                                <th style="background-color:khaki" scope="col">&nbsp;&nbsp;&nbsp;Tuesday&nbsp;&nbsp;&nbsp;</th>
+                                <th style="background-color:khaki" scope="col">&nbsp;&nbsp;&nbsp;Wednesday&nbsp;&nbsp;&nbsp;</th>
+                                <th style="background-color:khaki" scope="col">&nbsp;&nbsp;&nbsp;Thursday&nbsp;&nbsp;&nbsp;</th>
+                                <th style="background-color:khaki" scope="col">&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;</th>
+                                <th style="background-color:khaki" scope="col">&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;</th>
+                                <th style="background-color:khaki" scope="col">&nbsp;&nbsp;&nbsp;Sunday&nbsp;&nbsp;&nbsp;</th>
                             </tr>
                             <tr>
-                                <th>
+                                <td style="text-align:center; background-color:LightYellow">
                                 {% if 'M' in schedule_list[i] %}
                                     {% for class in schedule_list[i]['M'] %}
                                         {{class}}<br>
@@ -64,9 +64,9 @@
                                 {% else %}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 {% endif %}
-                                </th>
+                                </td>
 
-                                <th>
+                                <td style="text-align:center; background-color:LightYellow">
                                 {% if 'T' in schedule_list[i] %}
                                     {% for class in schedule_list[i]['T'] %}
                                         {{class}}<br>
@@ -74,9 +74,9 @@
                                 {% else %}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 {% endif %}
-                                </th>
+                                </td>
 
-                                <th>
+                                <td style="text-align:center; background-color:LightYellow">
                                 {% if 'W' in schedule_list[i] %}
                                     {% for class in schedule_list[i]['W'] %}
                                         {{class}}<br>
@@ -84,9 +84,9 @@
                                 {% else %}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 {% endif %}
-                                </th>
+                                </td>
 
-                                <th>
+                                <td style="text-align:center; background-color:LightYellow">
                                 {% if 'R' in schedule_list[i] %}
                                     {% for class in schedule_list[i]['R'] %}
                                         {{class}}<br>
@@ -94,9 +94,9 @@
                                 {% else %}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 {% endif %}
-                                </th>
+                                </td>
 
-                                <th>
+                                <td style="text-align:center; background-color:LightYellow">
                                 {% if 'F' in schedule_list[i] %}
                                     {% for class in schedule_list[i]['F'] %}
                                         {{class}}<br>
@@ -104,9 +104,9 @@
                                 {% else %}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 {% endif %}
-                                </th>
+                                </td>
 
-                                <th>
+                                <td style="text-align:center; background-color:LightYellow">
                                 {% if 'S' in schedule_list[i] %}
                                     {% for class in schedule_list[i]['S'] %}
                                         {{class}}<br>
@@ -114,7 +114,11 @@
                                 {% else %}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 {% endif %}
-                                </th>
+                                </td>
+
+                                <td style="text-align:center; background-color:LightYellow">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
                             </tr>
                         </table><br>
                     {% endfor %}
